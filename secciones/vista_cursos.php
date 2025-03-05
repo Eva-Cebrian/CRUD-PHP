@@ -21,6 +21,7 @@ error_reporting(E_ALL);
                         class="form-control"
                         name="id"
                         id="id"
+                        value="<?php echo $id ?>"
                         aria-describedby="helpId"
                         placeholder="ID" />
                     <small id="helpId" class="form-text text-muted">ID</small>
@@ -33,6 +34,7 @@ error_reporting(E_ALL);
                         class="form-control"
                         name="nombre_curso"
                         id="nombre_curso"
+                        value="<?php echo $nombre_curso ?>"
                         aria-describedby="helpId"
                         placeholder="Nombre del curso" />
                     <small id="helpId" class="form-text text-muted">Nombre del curso</small>
@@ -91,7 +93,14 @@ error_reporting(E_ALL);
                     <tr class="">
                         <td><?php echo $curso['id'] ?></td>
                         <td><?php echo $curso['nombre_curso'] ?></td>
-                        <td>Seleccionar</td>
+                        <td>
+
+                            <form action="" method="post">
+                                <input type="hidden" name="id" id="id" value="<?php echo $curso['id'] ?>">
+                                <input type="submit" value="Seleccionar" name="accion" class="btn btn-info">
+
+                            </form>
+                        </td>
                     </tr>
                 <?php } ?>
 

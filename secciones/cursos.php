@@ -17,15 +17,30 @@ if ($accion != '') {
             $consulta->execute();
 
 
-            echo $sql;
             break;
         case 'editar':
-            $sql = "UPDATE CURSOS SET nombre_curso='$nombre_curso' WHERE id=$id";
+            $sql = "UPDATE CURSOS SET nombre_curso=:nombre_curso WHERE id=:id";
+            $consulta = $conexionBD->prepare($sql);
+            $consulta->bindParam(':id', $id);
+            $consulta->bindParam(':nombre_curso', $nombre_curso);
+            $consulta->execute();
             echo $sql;
             break;
         case 'borrar':
-            $sql = "DELETE FROM CURSOS WHERE id=$id";
+            $sql = "DELETE FROM CURSOS WHERE id=:id";
+            $consulta = $conexionBD->prepare($sql);
+            $consulta->bindParam(':id', $id);
+            $consulta->execute();
             echo $sql;
+            break;
+        case 'Seleccionar':
+            $sql = "SELECT * FROM CURSOS WHERE id=:id";
+            $consulta = $conexionBD->prepare($sql);
+            $consulta->bindParam(':id', $id);
+            $consulta->execute();
+            $curso = $consulta->fetch(PDO::FETCH_ASSOC);
+            $nombre_curso = $curso['nombre_curso'];
+            echo $nombre_curso;
             break;
     }
 }
